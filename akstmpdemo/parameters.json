@@ -3,19 +3,19 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceName": {
-            "value": "aks-sample-12"
+            "value": "tanmay25"
         },
         "location": {
-            "value": "uksouth"
+            "value": "eastus"
         },
         "dnsPrefix": {
-            "value": "aks-sample-12-dns"
+            "value": "tanmay25-dns"
         },
         "kubernetesVersion": {
             "value": "1.21.7"
         },
         "networkPlugin": {
-            "value": "kubenet"
+            "value": "azure"
         },
         "enableRBAC": {
             "value": true
@@ -31,6 +31,33 @@
         },
         "vmssNodePool": {
             "value": true
+        },
+        "vnetSubnetID": {
+            "value": "/subscriptions/b991a45f-3f47-452a-8ff0-45969784e75e/resourceGroups/test1/providers/Microsoft.Network/virtualNetworks/test1-vnet/subnets/default"
+        },
+        "serviceCidr": {
+            "value": "10.0.0.0/16"
+        },
+        "dnsServiceIP": {
+            "value": "10.0.0.10"
+        },
+        "dockerBridgeCidr": {
+            "value": "172.17.0.1/16"
+        },
+        "workspaceName": {
+            "value": "DefaultWorkspace-b991a45f-3f47-452a-8ff0-45969784e75e-EUS"
+        },
+        "omsWorkspaceId": {
+            "value": "/subscriptions/b991a45f-3f47-452a-8ff0-45969784e75e/resourceGroups/DefaultResourceGroup-EUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-b991a45f-3f47-452a-8ff0-45969784e75e-EUS"
+        },
+        "workspaceRegion": {
+            "value": "eastus"
+        },
+        "acrName": {
+            "value": "registry25"
+        },
+        "acrResourceGroup": {
+            "value": "test1"
         }
     }
 }
