@@ -5,7 +5,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      ResourceGroupName: test1
+      ResourceGroupName: kuber
       ResourceGroupLocation: "eastus"
     steps:
       - uses: actions/checkout@master
