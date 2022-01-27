@@ -31,33 +31,5 @@
         },
         "vmssNodePool": {
             "value": true
-        },
-        "vnetSubnetID": {
-            "value": "/subscriptions/b991a45f-3f47-452a-8ff0-45969784e75e/resourceGroups/test1/providers/Microsoft.Network/virtualNetworks/test1-vnet/subnets/default"
-        },
-        "serviceCidr": {
-            "value": "10.0.0.0/16"
-        },
-        "dnsServiceIP": {
-            "value": "10.0.0.10"
-        },
-        "dockerBridgeCidr": {
-            "value": "172.17.0.1/16"
-        },
-        "workspaceName": {
-            "value": "DefaultWorkspace-b991a45f-3f47-452a-8ff0-45969784e75e-EUS"
-        },
-        "omsWorkspaceId": {
-            "value": "/subscriptions/b991a45f-3f47-452a-8ff0-45969784e75e/resourceGroups/DefaultResourceGroup-EUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-b991a45f-3f47-452a-8ff0-45969784e75e-EUS"
-        },
-        "workspaceRegion": {
-            "value": "eastus"
-        },
-        "acrName": {
-            "value": "registry25"
-        },
-        "acrResourceGroup": {
-            "value": "test1"
         }
     }
-}
