@@ -3,10 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceName": {
-            "value": "aks-sample-1459"
+            "value": "muff"
         },
         "location": {
-            "value": "uksouth"
+            "value": "eastus"
         },
         "dnsPrefix": {
             "value": "aks-sample-1459-dns"
