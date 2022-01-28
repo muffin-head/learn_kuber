@@ -1,11 +1,13 @@
 on: [push]
-name: templatedemonow2
+name: newtmptask1
+
+
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      ResourceGroupName: kuber
+      ResourceGroupName: deep12345
       ResourceGroupLocation: "eastus"
     steps:
       - uses: actions/checkout@master
@@ -25,5 +27,11 @@ jobs:
       - uses: azure/arm-deploy@v1
         with:
          resourceGroupName: ${{ env.ResourceGroupName }}
-         template: ./akstmpdemo/azuredeploy.json
+         template: ./akstmpdemo/template.json
          parameters: ./akstmpdemo/parameters.json
+         
+      - uses: Azure/aks-set-context@v1
+        with:
+         creds: ${{ secrets.AKS_CREDENTIALS }}
+         cluster-name: aks-sample-14
+         resource-group: deep123
