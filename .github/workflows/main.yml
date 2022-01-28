@@ -27,7 +27,7 @@ jobs:
       - uses: azure/arm-deploy@v1
         with:
          resourceGroupName: ${{ env.ResourceGroupName }}
-         template: ./akstmpdemo/template.json
+         template: ./akstmpdemo/azuredeploy.json
          parameters: ./akstmpdemo/parameters.json
          
       - uses: Azure/aks-set-context@v1
