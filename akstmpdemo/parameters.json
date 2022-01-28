@@ -3,19 +3,19 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceName": {
-            "value": "tanmay25"
+            "value": "muffin25"
         },
         "location": {
             "value": "eastus"
         },
         "dnsPrefix": {
-            "value": "tanmay25-dns"
+            "value": "muffin25-dns"
         },
         "kubernetesVersion": {
             "value": "1.21.7"
         },
         "networkPlugin": {
-            "value": "azure"
+            "value": "kubenet"
         },
         "enableRBAC": {
             "value": true
@@ -24,7 +24,7 @@
             "value": false
         },
         "enableHttpApplicationRouting": {
-            "value": false
+            "value": true
         },
         "enableAzurePolicy": {
             "value": false
