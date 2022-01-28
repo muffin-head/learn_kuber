@@ -95,140 +95,10 @@
                 "description": "Boolean flag to turn on and off omsagent addon."
             }
         },
-        "workspaceRegion": {
-            "type": "string",
-            "defaultValue": "East US",
-            "metadata": {
-                "description": "Specify the region for your OMS workspace."
-            }
-        },
-        "workspaceName": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify the name of the OMS workspace."
-            }
-        },
-        "omsWorkspaceId": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify the resource id of the OMS workspace."
-            }
-        },
-        "omsSku": {
-            "type": "string",
-            "defaultValue": "standalone",
-            "allowedValues": [
-                "free",
-                "standalone",
-                "pernode"
-            ],
-            "metadata": {
-                "description": "Select the SKU for your workspace."
-            }
-        },
-        "networkPolicy": {
-            "type": "string",
-            "metadata": {
-                "description": "Network policy used for building Kubernetes network."
-            }
-        },
-        "vnetSubnetID": {
-            "type": "string",
-            "metadata": {
-                "description": "Resource ID of virtual network subnet used for nodes and/or pods IP assignment."
-            }
-        },
-        "serviceCidr": {
-            "type": "string",
-            "metadata": {
-                "description": "A CIDR notation IP range from which to assign service cluster IPs."
-            }
-        },
-        "dnsServiceIP": {
-            "type": "string",
-            "metadata": {
-                "description": "Containers DNS server IP address."
-            }
-        },
-        "dockerBridgeCidr": {
-            "type": "string",
-            "metadata": {
-                "description": "A CIDR notation IP for Docker bridge."
-            }
-        }
-    },
-    "resources": [
-        {
-            "type": "Microsoft.Resources/deployments",
-            "name": "SolutionDeployment-20220128145441",
-            "apiVersion": "2017-05-10",
-            "resourceGroup": "[split(parameters('omsWorkspaceId'),'/')[4]]",
-            "subscriptionId": "[split(parameters('omsWorkspaceId'),'/')[2]]",
-            "properties": {
-                "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {},
-                    "variables": {},
-                    "resources": [
-                        {
-                            "apiVersion": "2015-11-01-preview",
-                            "type": "Microsoft.OperationsManagement/solutions",
-                            "location": "[parameters('workspaceRegion')]",
-                            "name": "[concat('ContainerInsights', '(', split(parameters('omsWorkspaceId'),'/')[8], ')')]",
-                            "properties": {
-                                "workspaceResourceId": "[parameters('omsWorkspaceId')]"
-                            },
-                            "plan": {
-                                "name": "[concat('ContainerInsights', '(', split(parameters('omsWorkspaceId'),'/')[8], ')')]",
-                                "product": "[concat('OMSGallery/', 'ContainerInsights')]",
-                                "promotionCode": "",
-                                "publisher": "Microsoft"
-                            }
-                        }
-                    ]
-                }
-            },
-            "dependsOn": [
-                "[concat('Microsoft.Resources/deployments/', 'WorkspaceDeployment-20220128145441')]"
-            ]
-        },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "name": "WorkspaceDeployment-20220128145441",
-            "apiVersion": "2017-05-10",
-            "resourceGroup": "[split(parameters('omsWorkspaceId'),'/')[4]]",
-            "subscriptionId": "[split(parameters('omsWorkspaceId'),'/')[2]]",
-            "properties": {
-                "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {},
-                    "variables": {},
-                    "resources": [
-                        {
-                            "apiVersion": "2015-11-01-preview",
-                            "type": "Microsoft.OperationalInsights/workspaces",
-                            "location": "[parameters('workspaceRegion')]",
-                            "name": "[parameters('workspaceName')]",
-                            "properties": {
-                                "sku": {
-                                    "name": "[parameters('omsSku')]"
-                                }
-                            }
-                        }
-                    ]
-                }
-            }
-        },
+    "resources":[
         {
             "apiVersion": "2021-07-01",
-            "dependsOn": [
-                "[concat('Microsoft.Resources/deployments/', 'WorkspaceDeployment-20220128145441')]",
-                "Microsoft.Network/virtualNetworks/kuber_test-vnet"
-            ],
+            "dependsOn": [],
             "type": "Microsoft.ContainerService/managedClusters",
             "location": "[parameters('location')]",
             "name": "[parameters('resourceName')]",
@@ -240,33 +110,22 @@
                     {
                         "name": "agentpool",
                         "osDiskSizeGB": "[parameters('osDiskSizeGB')]",
-                        "count": 3,
-                        "enableAutoScaling": true,
-                        "minCount": 1,
-                        "maxCount": 4,
-                        "vmSize": "Standard_DS2_v2",
+                        "count": 2,
+                        "enableAutoScaling": false,
+                        "vmSize": "Standard_B4ms",
                         "osType": "Linux",
                         "storageProfile": "ManagedDisks",
                         "type": "VirtualMachineScaleSets",
                         "mode": "System",
                         "maxPods": 110,
-                        "availabilityZones": [
-                            "1",
-                            "2",
-                            "3"
-                        ],
+                        "availabilityZones": [],
                         "enableNodePublicIP": false,
-                        "tags": {},
-                        "vnetSubnetID": "[parameters('vnetSubnetID')]"
+                        "tags": {}
                     }
                 ],
                 "networkProfile": {
                     "loadBalancerSku": "standard",
-                    "networkPlugin": "[parameters('networkPlugin')]",
-                    "networkPolicy": "[parameters('networkPolicy')]",
-                    "serviceCidr": "[parameters('serviceCidr')]",
-                    "dnsServiceIP": "[parameters('dnsServiceIP')]",
-                    "dockerBridgeCidr": "[parameters('dockerBridgeCidr')]"
+                    "networkPlugin": "[parameters('networkPlugin')]"
                 },
                 "apiServerAccessProfile": {
                     "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
@@ -277,12 +136,6 @@
                     },
                     "azurepolicy": {
                         "enabled": "[parameters('enableAzurePolicy')]"
-                    },
-                    "omsAgent": {
-                        "enabled": "[parameters('enableOmsAgent')]",
-                        "config": {
-                            "logAnalyticsWorkspaceResourceID": "[parameters('omsWorkspaceId')]"
-                        }
                     }
                 }
             },
@@ -290,91 +143,6 @@
             "identity": {
                 "type": "SystemAssigned"
             }
-        },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "name": "ClusterMonitoringMetricPulisherRoleAssignmentDepl-20220128145441",
-            "apiVersion": "2017-05-10",
-            "resourceGroup": "kuber_test",
-            "subscriptionId": "b991a45f-3f47-452a-8ff0-45969784e75e",
-            "properties": {
-                "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {},
-                    "variables": {},
-                    "resources": [
-                        {
-                            "type": "Microsoft.ContainerService/managedClusters/providers/roleAssignments",
-                            "apiVersion": "2018-01-01-preview",
-                            "name": "kuber2509/Microsoft.Authorization/7b835804-214d-46ac-be30-c8b2a938d603",
-                            "properties": {
-                                "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '3913510d-42f4-4e42-8a64-420c390055eb')]",
-                                "principalId": "[reference(parameters('resourceName')).addonProfiles.omsAgent.identity.objectId]",
-                                "scope": "/subscriptions/b991a45f-3f47-452a-8ff0-45969784e75e/resourceGroups/kuber_test/providers/Microsoft.ContainerService/managedClusters/kuber2509"
-                            }
-                        }
-                    ]
-                }
-            },
-            "dependsOn": [
-                "/subscriptions/b991a45f-3f47-452a-8ff0-45969784e75e/resourceGroups/kuber_test/providers/Microsoft.ContainerService/managedClusters/kuber2509"
-            ]
-        },
-        {
-            "apiVersion": "2020-11-01",
-            "name": "kuber_test-vnet",
-            "type": "Microsoft.Network/virtualNetworks",
-            "location": "eastus",
-            "properties": {
-                "subnets": [
-                    {
-                        "name": "default",
-                        "id": "/subscriptions/b991a45f-3f47-452a-8ff0-45969784e75e/resourceGroups/kuber_test/providers/Microsoft.Network/virtualNetworks/kuber_test-vnet/subnets/default",
-                        "properties": {
-                            "addressPrefix": "10.240.0.0/16"
-                        }
-                    }
-                ],
-                "addressSpace": {
-                    "addressPrefixes": [
-                        "10.0.0.0/8"
-                    ]
-                }
-            },
-            "tags": {}
-        },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "name": "ClusterSubnetRoleAssignmentDeployment-20220128145441",
-            "apiVersion": "2017-05-10",
-            "resourceGroup": "kuber_test",
-            "subscriptionId": "b991a45f-3f47-452a-8ff0-45969784e75e",
-            "properties": {
-                "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {},
-                    "variables": {},
-                    "resources": [
-                        {
-                            "type": "Microsoft.Network/virtualNetworks/subnets/providers/roleAssignments",
-                            "apiVersion": "2018-09-01-preview",
-                            "name": "kuber_test-vnet/default/Microsoft.Authorization/f9a5f2cb-8600-4ebd-a78c-02f42103182c",
-                            "properties": {
-                                "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '4d97b98b-1d4f-4787-a291-c67834d212e7')]",
-                                "principalId": "[reference(parameters('resourceName'),'2021-07-01','Full').identity.principalId]",
-                                "scope": "/subscriptions/b991a45f-3f47-452a-8ff0-45969784e75e/resourceGroups/kuber_test/providers/Microsoft.Network/virtualNetworks/kuber_test-vnet/subnets/default"
-                            }
-                        }
-                    ]
-                }
-            },
-            "dependsOn": [
-                "Microsoft.Network/virtualNetworks/kuber_test-vnet"
-            ]
         }
     ],
     "outputs": {
