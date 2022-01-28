@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceName": {
-            "value": "aks-sample-12"
+            "value": "aks-sample-1459"
         },
         "location": {
             "value": "uksouth"
         },
         "dnsPrefix": {
-            "value": "aks-sample-12-dns"
+            "value": "aks-sample-1459-dns"
         },
         "kubernetesVersion": {
             "value": "1.21.7"
@@ -24,7 +24,7 @@
             "value": false
         },
         "enableHttpApplicationRouting": {
-            "value": false
+            "value": true
         },
         "enableAzurePolicy": {
             "value": false
