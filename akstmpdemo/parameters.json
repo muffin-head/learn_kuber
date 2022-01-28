@@ -3,19 +3,19 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceName": {
-            "value": "aks-sample-12"
+            "value": "kuber2509"
         },
         "location": {
-            "value": "uksouth"
+            "value": "eastus"
         },
         "dnsPrefix": {
-            "value": "aks-sample-12-dns"
+            "value": "kuber2509-dns"
         },
         "kubernetesVersion": {
             "value": "1.21.7"
         },
         "networkPlugin": {
-            "value": "kubenet"
+            "value": "azure"
         },
         "enableRBAC": {
             "value": true
@@ -32,5 +32,4 @@
         "vmssNodePool": {
             "value": true
         }
-    }
 }
