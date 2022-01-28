@@ -151,4 +151,4 @@
             "value": "[reference(concat('Microsoft.ContainerService/managedClusters/', parameters('resourceName'))).fqdn]"
         }
     }
-}
+} }
