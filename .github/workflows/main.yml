@@ -1,11 +1,13 @@
 on: [push]
-name: templatedemonow2
+name: newtmptask1
+
+
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      ResourceGroupName: test1
+      ResourceGroupName: deep123
       ResourceGroupLocation: "eastus"
     steps:
       - uses: actions/checkout@master
@@ -27,3 +29,15 @@ jobs:
          resourceGroupName: ${{ env.ResourceGroupName }}
          template: ./akstmpdemo/azuredeploy.json
          parameters: ./akstmpdemo/parameters.json
+         
+      - uses: Azure/aks-set-context@v1
+        with:
+         creds: ${{ secrets.AKS_CREDENTIALS }}
+         cluster-name: deep123
+         resource-group: deep123
+         
+      - uses: Azure/CLI@v1
+        with:
+          inlineScript: |
+            #!/bin/bash
+            az get-credentials --resource-group deep123 --name deep123 
