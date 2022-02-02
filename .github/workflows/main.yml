@@ -23,10 +23,12 @@ jobs:
             
 
         
-      - uses: azure/setup-kubectl@v1
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          version: 'v1.18.8'
-          command: kubectl create namespace ratingapp
+          args: kubectl create namespaces ratingapp
+
         
 
             
