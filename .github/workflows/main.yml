@@ -19,4 +19,4 @@ jobs:
         with:
           inlineScript: |
             #!/bin/bash
-            az get-credentials --resource-group deep123 --name muffin25
+            az aks get-credentials --resource-group deep123 --name muffin25
