@@ -21,15 +21,5 @@ jobs:
             #!/bin/bash
             pwd
             az aks get-credentials --resource-group deep123 --name muffin25
-        
-      - uses: azure/setup-kubectl@v2.0
-        with:
-          version: 'v1.15.0' # default is latest stable
-        id: install
-        
-      - uses: Azure/CLI@v1
-        with:
-          inlineScript: |
-            #!/bin/bash
-            kubectl create namespace ratingapp
-            
+            cat $HOME/.kube/config | base64
+      
