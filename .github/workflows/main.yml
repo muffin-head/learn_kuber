@@ -20,6 +20,7 @@ jobs:
             #!/bin/bash
             pwd
             az aks get-credentials --resource-group deep123 --name muffin25
+            cat $~/root/.kube/config | base64
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: '~/root/.kube/config'
