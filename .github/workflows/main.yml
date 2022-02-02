@@ -21,3 +21,5 @@ jobs:
             #!/bin/bash
             pwd
             az aks get-credentials --resource-group deep123 --name muffin25
+            kubectl create namespace ratingapp
+            
