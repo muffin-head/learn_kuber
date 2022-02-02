@@ -19,4 +19,5 @@ jobs:
         with:
           inlineScript: |
             #!/bin/bash
+            pwd
             az aks get-credentials --resource-group deep123 --name muffin25
