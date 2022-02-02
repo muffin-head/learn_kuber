@@ -1,7 +1,5 @@
 on: [push]
-name: newtmptask1
-
-
+name: templatedemonow2
 
 jobs:
   build-and-deploy:
@@ -14,12 +12,18 @@ jobs:
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-         
       - uses: Azure/CLI@v1
         with:
           inlineScript: |
             #!/bin/bash
-            pwd
-            az aks get-credentials --resource-group deep123 --name muffin25
-            cat $HOME/.kube/config | base64
-      
+            if $(az group exists --name ${{ env.ResourceGroupName }}) ; then
+              echo "Azure resource group already exists, skipping creation..."
+            else
+              az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
+              echo "Azure resource group created"
+            fi
+      - uses: azure/arm-deploy@v1
+        with:
+         resourceGroupName: ${{ env.ResourceGroupName }}
+         template: ./akstmpdemo/acr.json
+         parameters: ./akstmpdemo/acr_param.json
