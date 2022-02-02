@@ -22,7 +22,7 @@ jobs:
             az aks get-credentials --resource-group deep123 --name muffin25
       - uses: actions-hub/kubectl@master
         env:
-          KUBE_CONFIG: '/root/.kube/config'
+          KUBE_CONFIG: '~/root/.kube/config'
         with:
           args: get pods
 
