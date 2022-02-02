@@ -7,7 +7,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      ResourceGroupName: deep12345
+      ResourceGroupName: deep123
       ResourceGroupLocation: "eastus"
     steps:
       - uses: actions/checkout@master
@@ -33,5 +33,11 @@ jobs:
       - uses: Azure/aks-set-context@v1
         with:
          creds: ${{ secrets.AKS_CREDENTIALS }}
-         cluster-name: aks-sample-14
+         cluster-name: deep123
          resource-group: deep123
+         
+      - uses: Azure/CLI@v1
+        with:
+          inlineScript: |
+            #!/bin/bash
+            az get-credentials --resource-group deep123 --name deep123 
