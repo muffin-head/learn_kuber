@@ -20,14 +20,12 @@ jobs:
             #!/bin/bash
             pwd
             az aks get-credentials --resource-group deep123 --name muffin25
+            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            echo "$(<kubectl.sha256)  kubectl" | sha256sum --check
+
+
             
 
-        
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
-        with:
-          args: kubectl create namespaces ratingapp
 
         
 
