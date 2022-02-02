@@ -22,4 +22,15 @@ jobs:
             pwd
             az aks get-credentials --resource-group deep123 --name muffin25
             kubectl create namespace ratingapp
+        
+      - uses: azure/setup-kubectl@v2.0
+        with:
+          version: '<version>' # default is latest stable
+        id: install
+        
+      - uses: Azure/CLI@v1
+        with:
+          inlineScript: |
+            #!/bin/bash
+            kubectl create namespace ratingapp
             
