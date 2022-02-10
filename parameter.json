@@ -1,0 +1,72 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "value": "muffin98"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "dnsPrefix": {
+            "value": "muffin98-dns"
+        },
+        "kubernetesVersion": {
+            "value": "1.21.7"
+        },
+        "networkPlugin": {
+            "value": "azure"
+        },
+        "enableRBAC": {
+            "value": true
+        },
+        "servicePrincipalClientId": {
+            "value": null
+        },
+        "servicePrincipalClientSecret": {
+            "value": null
+        },
+        "enablePrivateCluster": {
+            "value": false
+        },
+        "aadSessionKey": {
+            "value": null
+        },
+        "enableHttpApplicationRouting": {
+            "value": false
+        },
+        "enableAzurePolicy": {
+            "value": false
+        },
+        "enableSecretStoreCSIDriver": {
+            "value": false
+        },
+        "vmssNodePool": {
+            "value": true
+        },
+        "vnetSubnetID": {
+            "value": "/subscriptions/551459f9-4e40-44d4-8321-d3201bab0dad/resourceGroups/kuber25/providers/Microsoft.Network/virtualNetworks/kuber25-vnet/subnets/default"
+        },
+        "serviceCidr": {
+            "value": "10.0.0.0/16"
+        },
+        "dnsServiceIP": {
+            "value": "10.0.0.10"
+        },
+        "dockerBridgeCidr": {
+            "value": "172.17.0.1/16"
+        },
+        "principalId": {
+            "value": "e060ffc4-b331-49fc-a49c-4d71bc668eb8"
+        },
+        "workspaceName": {
+            "value": "DefaultWorkspace-551459f9-4e40-44d4-8321-d3201bab0dad-EUS"
+        },
+        "omsWorkspaceId": {
+            "value": "/subscriptions/551459f9-4e40-44d4-8321-d3201bab0dad/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-551459f9-4e40-44d4-8321-d3201bab0dad-eus"
+        },
+        "workspaceRegion": {
+            "value": "eastus"
+        }
+    }
+}
