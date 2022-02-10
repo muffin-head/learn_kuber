@@ -21,10 +21,10 @@
             "value": true
         },
         "servicePrincipalClientId": {
-            "value": null
+            "value": '7ba5bb2c-3254-4a8d-acb2-98aff089c6ba'
         },
         "servicePrincipalClientSecret": {
-            "value": null
+            "value": '9.vX0bWuiP7HGDi4nGSqiwXuT686d3SWfk'
         },
         "enablePrivateCluster": {
             "value": false
